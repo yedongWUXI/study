@@ -103,12 +103,7 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.3.13.RELEASE</version>
 		</dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <version>8.5.23</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
