@@ -15,15 +15,27 @@ public class Apple {
     String color;
     int weight;
 
+    public Apple(String color) {
+        this.color = color;
+    }
+
     public Apple(String color, int weight) {
         this.color = color;
         this.weight = weight;
     }
+
+
+
 
     public static boolean isGreenApple(Apple apple) {
         return "green".equals(apple.getColor());
     }
     public static boolean isHeavyApple(Apple apple) {
         return apple.getWeight() > 150;
+    }
+
+
+    public String getColor(){
+        return this.color;
     }
 }
