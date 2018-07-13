@@ -1,8 +1,11 @@
 package com.example.demo.ExtendsTest;
 
+import lombok.NoArgsConstructor;
+
 /**
  * Created by zhangyedong on 2017/12/14.
  */
+@NoArgsConstructor
 public class Student extends People {
     String studentName;
     public Student(String name) {
@@ -14,15 +17,15 @@ public class Student extends People {
         return studentName;
     }
 
+    @Override
+    public void eat() {
+        System.out.println("student to eat");
+    }
+
     public static void main(String[] args) {
         Student st = new Student("zs");
-        try {
-            Student.class.newInstance().getStudentName();
-            People.class.newInstance().getName();
             st.getStudentName();
             System.out.println(st.studentName);
-        }catch (Exception e){
-
-        }
+            System.out.println(st.name);
     }
 }
