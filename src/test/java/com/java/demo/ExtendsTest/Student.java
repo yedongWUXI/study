@@ -1,13 +1,16 @@
 package com.java.demo.ExtendsTest;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * Created by zhangyedong on 2017/12/14.
  */
 @NoArgsConstructor
+@Data
 public class Student extends People {
     String studentName;
+    String name;
     public Student(String name) {
         super(name);
         System.out.println(this.studentName);

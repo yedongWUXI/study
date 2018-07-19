@@ -16,5 +16,10 @@ public class XiaoMing extends Student {
         xm.eat();//在继承关系中，当多重继承的时候，调用的是最近的父类的方法
     }
 
+    public void updateMap(){
+        map.clear();
+        map.put("XiaoMing","2");
+    }
+
 
 }
