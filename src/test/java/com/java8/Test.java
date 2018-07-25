@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.IntPredicate;
-import java.util.function.Supplier;
 
 /**
  * @Description: java类作用描述
@@ -79,5 +77,7 @@ public class Test {
 
     @org.junit.Test
     public void test1() {
+
+
     }
 }
