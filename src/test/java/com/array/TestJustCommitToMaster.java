@@ -10,5 +10,6 @@ package com.array;
 public class TestJustCommitToMaster {
     public static void main(String[] args) {
         System.out.println("用来测试仅仅提交到master，不push到origin，提交完后如何继续提交到origin");
+        System.out.println("用来测试仅仅提交到master，不push到origin，提交完后如何继续提交到origin");
     }
 }
