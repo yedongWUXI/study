@@ -1,5 +1,8 @@
 package com.java.demo.stringpractice.string_utils;
 
+import org.apache.commons.lang.StringUtils;
+import org.junit.Test;
+
 import java.util.StringTokenizer;
 
 /**
@@ -27,5 +30,44 @@ public class StringTest {
         String[] result = "this is a test".split("\\s");
         for (int x = 0; x < result.length; x++)
             System.out.println(result[x]);
+    }
+
+
+
+    @Test
+    public void testStripEnd(){
+        //去除后面的空格，（还有stripStart）
+        String ss = StringUtils.stripEnd("ss                  ", "\0");
+        System.out.println(ss);
+
+        int end;
+        if((end =1 )!= 0){
+            System.out.println(11111);
+        }
+
+        System.out.println(end =1);
+
+        end = 1;
+    }
+
+    @Test
+    public void test1(){
+        String str = "abcd";
+        byte[] bs = str.getBytes();
+        System.out.println(bs);
+    }
+
+
+    @Test
+    public void test2(){
+        String tranSerialNumber = getTranSerialNumber();
+        System.out.println(tranSerialNumber);
+    }
+
+    public String getTranSerialNumber(){
+        String date = "22222";
+        //往左边填补，padStr:填补内容  size：填补后总长度
+        String str = StringUtils.leftPad(date , 16 , "0");
+        return str;
     }
 }

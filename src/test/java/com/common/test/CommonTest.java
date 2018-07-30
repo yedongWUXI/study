@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.processing.AbstractProcessor;
 import java.lang.reflect.Type;
+import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.locks.Condition;
+import java.util.stream.Collectors;
 
 /**
  * @author zhangyedong
@@ -14,13 +18,13 @@ import java.lang.reflect.Type;
  */
 public class CommonTest {
     @Transactional
-    public void test(){
+    public void test() {
 
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        for (int i=0, n=args.length; i<n; i++) {
-            System.out.println("Arg " + i +":" + args[i]);
+        for (int i = 0, n = args.length; i < n; i++) {
+            System.out.println("Arg " + i + ":" + args[i]);
         }
         System.out.println(11);
         Type type = new Type() {
@@ -34,10 +38,24 @@ public class CommonTest {
     }
 
     @Test
-    public void test1(){
+    public void test1() {
         AbstractProcessor abstractProcessor = null;
         BeanDefinition beanDefinition = null;
         BeanDefinitionRegistry beanDefinitionRegistry = null;
         ClassLoader classLoader = null;
+        ArrayBlockingQueue arrayBlockingQueue = null;
+        Condition condition = null;
+        SortedMap<Integer, String> sortedMap = new TreeMap<Integer, String>();
+        sortedMap.put(2,"2");
+        sortedMap.put(1,"1");
+        sortedMap.put(4,"4");
+        sortedMap.put(3,"3");
+        List<String> msgList = new ArrayList<>();
+        msgList.add("1");
+        msgList.add("1");
+        msgList.add("1");
+        msgList.add("2");
+        List<String> collect = msgList.stream().distinct().collect(Collectors.toList());
+        System.out.println(Arrays.toString(collect.toArray()));
     }
 }
