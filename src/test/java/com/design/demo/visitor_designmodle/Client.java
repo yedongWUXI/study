@@ -6,6 +6,8 @@ import java.util.List;
 /**
  * @author zhangyedong
  * @date 2018/3/14.
+ *
+ * 访问者模式总结：每个员工依赖（抽象依赖）（根据传参）一个具体的访问者
  */
 public class Client {
     public static void main(String[] args) {

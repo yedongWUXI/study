@@ -6,9 +6,10 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.processing.AbstractProcessor;
+import java.awt.image.DataBuffer;
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.Condition;
 import java.util.stream.Collectors;
 
@@ -45,6 +46,11 @@ public class CommonTest {
         ClassLoader classLoader = null;
         ArrayBlockingQueue arrayBlockingQueue = null;
         Condition condition = null;
+        ConcurrentHashMap concurrentHashMap = null;
+        Exchanger exchanger = null;
+        DataBuffer dataBuffer = null;
+        Callable callable = null;
+        ThreadPoolExecutor threadPoolExecutor = null;
         SortedMap<Integer, String> sortedMap = new TreeMap<Integer, String>();
         sortedMap.put(2,"2");
         sortedMap.put(1,"1");
