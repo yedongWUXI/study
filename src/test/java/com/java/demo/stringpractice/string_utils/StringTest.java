@@ -70,4 +70,17 @@ public class StringTest {
         String str = StringUtils.leftPad(date , 16 , "0");
         return str;
     }
+
+
+    @Test
+    public void StringFormate() {
+        String str = null;
+        str = String.format("格式参数$的使用：%1$d,%2$s", 99, "abc");           // 格式化字符串
+        System.out.println(str);                                                                                     // 输出字符串变量
+        System.out.printf("显示正负数的符号：%+d与%d%n", 99, -99);
+        System.out.printf("最牛的编号是：%03d%n", 7);
+        System.out.printf("Tab键的效果是：% 8d%n", 7);
+        System.out.printf("整数分组的效果是：%,d%n", 9989997);
+        System.out.printf("一本书的价格是：%2.2f元%n", 49.8);
+    }
 }

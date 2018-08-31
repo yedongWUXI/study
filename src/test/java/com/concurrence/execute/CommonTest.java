@@ -2,10 +2,7 @@ package com.concurrence.execute;
 
 import org.junit.Test;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @Description: java类作用描述
@@ -16,6 +13,13 @@ import java.util.concurrent.TimeUnit;
 
 public class CommonTest {
     public static void main(String[] args) {
+
+        //创建等待队列
+        BlockingQueue<Runnable> bqueue = new ArrayBlockingQueue<>(20);
+        //自定义线程池，池中保存的线程数为3，允许的最大线程数为5
+        //PS:以下的test都是程序自带的线程池模板
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(3, 5, 50, TimeUnit.MILLISECONDS, bqueue);
+
     }
 
     /**
@@ -25,7 +29,7 @@ public class CommonTest {
      * 再次提交的任务都会加入队列等到其他线程运行结束，当线程处于空闲状态时会被下一个任务复用
      */
     @Test
-    public void test() {
+    public void newFixedThreadPool() {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
         for (int i = 0; i < 20; i++) {
             Runnable syncRunnable = () -> System.out.println(Thread.currentThread().getName());
@@ -40,7 +44,7 @@ public class CommonTest {
      * 先查看池中有没有以前创建的线程，如果有，就复用.如果没有，就新建新的线程加入池中，缓存型池子通常用于执行一些生存期很短的异步型任务
      */
     @Test
-    public void test1() {
+    public void newCachedThreadPool() {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < 100; i++) {
             Runnable syncRunnable = () -> System.out.println(Thread.currentThread().getName());
@@ -54,7 +58,7 @@ public class CommonTest {
      * 运行结果和newFixedThreadPool类似，不同的是newScheduledThreadPool是延时一定时间之后才执行
      */
     @Test
-    public void test2() {
+    public void schedule() {
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5);
         for (int i = 0; i < 20; i++) {
             Runnable syncRunnable = () -> System.out.println(Thread.currentThread().getName());
@@ -68,13 +72,13 @@ public class CommonTest {
     }
 
     /**
-     * 创建并执行一个在给定初始延迟后首次启用的定期操作，后续操作具有给定的周期；
+     * scheduleAtFixedRate 创建并执行一个在给定初始延迟后首次启用的定期操作，后续操作具有给定的周期；
      * 也就是将在 initialDelay 后开始执行，然后在initialDelay+period 后执行，接着在 initialDelay + 2 * period 后执行，依此类推
      *
      * PS:不受计划执行时间的影响。到时间，它就执行
      */
     @Test
-    public void test3() {
+    public void scheduleAtFixedRate() {
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5);
         Runnable syncRunnable = () -> System.out.println(Thread.currentThread().getName());
         executorService.scheduleAtFixedRate(syncRunnable, 5000, 3000, TimeUnit.MILLISECONDS);
@@ -86,12 +90,13 @@ public class CommonTest {
     }
 
     /**
+     * scheduleWithFixedDelay
      * 创建并执行一个在给定初始延迟后首次启用的定期操作，随后，在每一次执行终止和下一次执行开始之间都存在给定的延迟
      *
      * PS:受计划执行时间的影响,无论某个任务执行多长时间，等执行完了，我再延迟指定的时间
      */
     @Test
-    public void test4() {
+    public void scheduleWithFixedDelay() {
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5);
         Runnable syncRunnable = () -> System.out.println(Thread.currentThread().getName());
         executorService.scheduleWithFixedDelay(syncRunnable, 5000, 3000, TimeUnit.MILLISECONDS);
@@ -108,7 +113,7 @@ public class CommonTest {
      * 运行结果：只会创建一个线程，当上一个执行完之后才会执行第二个
      */
     @Test
-    public void test5() {
+    public void newSingleThreadExecutor() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         for (int i = 0; i < 20; i++) {
             Runnable syncRunnable = () -> System.out.println(Thread.currentThread().getName());
