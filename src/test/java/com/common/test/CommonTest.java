@@ -52,10 +52,10 @@ public class CommonTest {
         Callable callable = null;
         ThreadPoolExecutor threadPoolExecutor = null;
         SortedMap<Integer, String> sortedMap = new TreeMap<Integer, String>();
-        sortedMap.put(2,"2");
-        sortedMap.put(1,"1");
-        sortedMap.put(4,"4");
-        sortedMap.put(3,"3");
+        sortedMap.put(2, "2");
+        sortedMap.put(1, "1");
+        sortedMap.put(4, "4");
+        sortedMap.put(3, "3");
         List<String> msgList = new ArrayList<>();
         msgList.add("1");
         msgList.add("1");
@@ -63,5 +63,42 @@ public class CommonTest {
         msgList.add("2");
         List<String> collect = msgList.stream().distinct().collect(Collectors.toList());
         System.out.println(Arrays.toString(collect.toArray()));
+    }
+
+    /**
+     * float double 在计算的时候由于计算机是转为最为接近的二进制的，所以计算出来不精确
+     */
+    @Test
+    public void test2() {
+        float a = (float) 0.1;
+        float b = (float) 0.2;
+        System.out.println(a * b);
+        double a1 = 0.1;
+        double b1 = 0.2;
+        System.out.println(a1 * b1);
+
+
+    }
+
+
+    @Test
+    public void test3() {
+//        Duration;
+    }
+
+    @Test
+    public void test4() {
+        Map map = new HashMap();
+        Object key = map.get("key");
+        if (key == null) {
+            key = new Object();
+            map.put("key", key);
+        }
+
+        Object key1 = map.get("key");
+        System.out.println(key1 == null);
+
+        //java8之后多了这个更简便的方法，其实就是多了一个回调赋值的操作
+        Object key2 = map.computeIfAbsent("key", k -> new Object());
     }
 }

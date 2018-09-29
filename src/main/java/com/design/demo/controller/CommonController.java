@@ -1,5 +1,6 @@
 package com.design.demo.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.design.demo.config.ValueDemo;
 import com.design.demo.domain.Student;
 import com.design.demo.web.Test;
@@ -21,8 +22,10 @@ public class CommonController {
     ValueDemo valueDemo;
     @RequestMapping("one")
     public String aopTest(){
-
-        return test.test();
+        Student student = new Student("zs");
+        String studentStr = JSONObject.toJSON(student).toString();
+        return studentStr;
+//        return test.test();
     }
 
     @RequestMapping("two")

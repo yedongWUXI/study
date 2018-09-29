@@ -228,7 +228,7 @@ public class Stream {
     @Test
     public void test6() {
 
-        String time = "2018/05/23/19";//获取制定日期时间戳
+        String time = "2018/06/10/19";//获取制定日期时间戳
         Date date1 = null;
         try {
             date1 = new SimpleDateFormat("yyyy/MM/dd/hh").parse(time);
