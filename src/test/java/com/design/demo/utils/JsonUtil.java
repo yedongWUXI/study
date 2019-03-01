@@ -1,11 +1,7 @@
 package com.design.demo.utils;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author zhangyedong
@@ -21,33 +17,31 @@ public class JsonUtil {
         return JSONObject.toJSONString(obj);
     }
 
-    public static void main(String[] args) {
-        List list = new ArrayList();
-        Map map1 = new HashMap();
+    /**
+     * 拉平Json里的datas，数组直接拉出来，对象把最底层的叶子全拉出来
+     *
+     * @param json
+     */
+    public static void flatJson(JSONObject json) {
+        JSONObject res = new JSONObject();
+        scanJSON(json.getJSONObject("Datas"), res);
+        json.put("Datas", res);
+    }
 
-
-        for(int j = 0 ; j<10 ; j++){
-            List listMin = new ArrayList();
-            for(int i = 0 ; i< 10; i++){
-                Map<String,String> map = new HashMap();
-                map.put(j + i + "", i + j + "");
-                listMin.add(map);
+    private static void scanJSON(JSONObject json, JSONObject res) {
+        json.forEach((k, v) -> {
+            if (v instanceof JSONObject) {
+                scanJSON((JSONObject) v, res);
+            } else if (v instanceof JSONArray) {
+                res.put(k, v);
+            } else {
+                res.put(k, v);
             }
-            list.add(listMin);
 
-        }
+        });
+    }
 
-//        Object put = map1.put(0+"", 1+"");
-//        Object put1 = map1.put(0+"", 2+"");
-//        Object put2 = map1.put(0+"", 3+"");
-//        Object put3 = map1.put(0+"", 4+"");
+    public static void main(String[] args) {
 
-        String s = bean2Json(list);
-        System.out.println(s);
-        List o = (List)stringToBean(s, List.class);
-        List o1 = (List)o.get(0);
-        Map o2 = (Map)o1.get(0);
-        String o3 = (String) o2.get("0");
-        System.out.println(o3);
     }
 }

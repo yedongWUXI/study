@@ -12,11 +12,12 @@ import java.net.URLConnection;
  * @date 2018/5/27.
  */
 public class UrlIoTest {
+
     @Test
     public void test(){
         InputStream in = null;
         try {
-            URL url = new URL("http://localhost:8080/one");
+            URL url = new URL("http://localhost:8004/one");
             URLConnection urlConnection = url.openConnection();
             in = urlConnection.getInputStream();
             byte[] bs = new byte[in.available()];

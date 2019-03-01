@@ -289,4 +289,10 @@ public class Stream {
         System.out.println(substring);
     }
 
+    @Test
+    public void test10() {
+        System.out.println(System.currentTimeMillis());
+        System.out.println(System.currentTimeMillis() - 5 * 60 * 1000);
+    }
+
 }

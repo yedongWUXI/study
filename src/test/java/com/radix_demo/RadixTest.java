@@ -5,13 +5,20 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
- * @Description: java类作用描述
+ * @Description: byte, 二进制
  * @Author: wxzhangyd
  * @Date: 2018/7/16 17:59
  * @Modified by:
  */
 
 public class RadixTest {
+    /**
+     * String -->转 byte
+     * <p>
+     * String -->方法 byte[] getBytes()
+     * 具体参考注释   encoded in the default charset
+     * 可参考ASCII表
+     */
     @Test
     public void test(){
         Byte bt = new Byte("10");
@@ -27,7 +34,47 @@ public class RadixTest {
         byte[] bytes2 = s2.getBytes();
         System.out.println(Arrays.toString(bytes2));
         byte[] bytes3 = {127};
+        byte a = 127;
+
         String s3 = bytes3.toString();
+        String s4 = Arrays.toString(bytes3);
         System.out.println(s3);
+        System.out.println(s4);
+    }
+
+
+    /**
+     * 十进制、byte、二进制
+     */
+    @Test
+    public void test1() {
+
+        Byte bt = new Byte("48");
+        System.out.println(bt.byteValue());
+        //把byte转为二进制
+        String binaryString = Integer.toBinaryString(10);
+        //把byte转为十进制
+        String decimalString = Integer.toString(10);
+        System.out.println(binaryString);
+        System.out.println(decimalString);
+        //ASCII里32是空格
+        String s1 = new String("     ");
+        //把string根据ASCII转为byte数组
+        byte[] bytes = s1.getBytes();
+        System.out.println(Arrays.toString(bytes));
+
+    }
+
+
+    @Test
+    public void test2() {
+        //注意这里i是十进制,但还是可以直接进行二进制操作的
+        int i = 1010;
+        //<<1是进行二进制左移一位,二进制左移一位,等于扩大一倍（乘以二）
+        //补充：对于左移，直观的理解为，对于正数来说，左移相当于乘以2（但效率比乘法高）；对于负数来说，没有直观的理解。
+        System.out.println(i << 1);
+
+        //同理右移:对于右移，直观的理解为，对于正数来说，右1移相当于除以2（但效率比除法高）；对于负数来说，没有直观的理解。
+
     }
 }

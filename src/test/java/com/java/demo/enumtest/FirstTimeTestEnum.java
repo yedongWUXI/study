@@ -37,6 +37,7 @@ public enum  FirstTimeTestEnum {
     }
 
     public static void main(String[] args) {
+
         /**
          * All the
          * constants of an enum type can be obtained by calling the
