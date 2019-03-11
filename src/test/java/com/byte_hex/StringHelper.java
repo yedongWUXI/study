@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Locale;
 
 /**
- * @Description: String 和 byte hex
+ * @Description: String 和 byte hex 工具类
  * @Author: wxzhangyd
  * @Date: 2019/1/22 13:11
  * @Modified by:
