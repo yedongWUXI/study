@@ -1,8 +1,10 @@
 package com.design.demo.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.design.demo.utils.bean.TessClass;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,4 +59,19 @@ public class JsonTest {
         flatJson(jsonObject);
         System.out.println(jsonObject.toJSONString());
     }
+
+    /**
+     * 自定义json使用JacksonUtil解析,属性得和json的key一一对应
+     *
+     * @throws IOException
+     */
+    @Test
+    public void test2() throws IOException {
+        String json = "{\"key\":[{\"test1\":\"\",\"test2\":\"\",\"test3\":\"\"},{\"test1\":\"\",\"test2\":\"\",\"test3\":\"\"}]}";
+        TessClass tessClass = JacksonUtil.json2Bean(json, TessClass.class);
+        System.out.println(tessClass.toString());
+
+
+    }
+
 }
