@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue入门</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+<!--
+
+@:  >>>  v-click:
+:   >>>  v-bind:
+
+
+
+
+
+
+
+
+-->
+<div id="app">{{msg}}</div>
+<div id="click">
+    <div @click="handleClick">{{msg}}</div>
+
+</div>
+
+<div id="properties">
+    <div :title="msg">hello vue</div>
+
+</div>
+
+
+<div id="variable">
+    <div>
+        姓<input v-model="firstName">
+        名<input v-model="secondName">
+        <div>{{fullName}}</div>
+        <div>{{count}}</div>
+        <div v-if="show">this is show</div>
+        <button @click="handleClick">click hell</button>
+        <ul>
+            <li v-for="item of list" :key="item">{{item}}</li>
+            <li v-for="(item,index) of list" :key="index">{{item}}</li>
+        </ul>
+    </div>
+
+</div>
+
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            msg: "hello vue"
+        }
+
+    })
+
+
+    new Vue({
+        el: "#click",
+        data: {
+            msg: "hello vue"
+        },
+        methods: {
+            handleClick: function () {
+                alert(123)
+                this.msg = "hu xiao dan"
+            }
+        }
+
+    })
+
+
+    new Vue({
+        el: "#properties",
+        data: {
+            msg: "this is title "
+        },
+        methods: {
+            handleClick: function () {
+                alert(123)
+                this.msg = "hu xiao dan"
+            }
+        }
+
+    })
+
+
+    new Vue({
+        el: "#variable",
+        data: {
+            msg: "this is title ",
+            firstName: "",
+            secondName: "",
+            count: 0,
+            show: true,
+            list: [1, 2, 3, 4]
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show;
+            }
+        },
+        computed: {////计算属性，当数据发生变化时才调用，否则直接调用缓存。提升性能
+            fullName: function () {
+                return this.firstName + this.secondName;
+            }
+        },
+        watch: {
+            fullName: function () {//监听fullName
+                this.count++
+            }
+        }
+
+    })
+
+
+</script>
+</body>
+</html>
