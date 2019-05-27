@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue入门</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<!--父组件通过属性的方式向子组件传递内容  比如  :index
+    子组件通过发布,父组件通过订阅  比如this.$emit(发布)  @delete(订阅)
+-->
+<div id="root">
+    <div>
+        <input v-model="inputValue"/>
+        <button @click="handleSubmit">提交</button>
+    </div>
+    <ul>
+        <!--<li v-for="(item,index) of list" :key="index">-->
+            <!--{{item}}-->
+        <!--</li>-->
+        <!--父组件向子组件传值，通过属性得形式，比如content1111-->
+        <todo-item
+                v-for="(item,index) of list"
+                :key="index"
+                :content1111="item"
+                :index="index"
+                @delete="handleDelete"
+        >
+
+        </todo-item><!--//这个是父组件-->
+    </ul>
+
+</div>
+
+<script>
+    //局部组件
+//    var TodoItem = {
+//        template:'<li>item</li>'
+//    }
+
+
+
+    //全局组件，在这里是子组件
+    Vue.component('todo-item',{
+        props:['content1111','index'],
+        template:'<li @click="handleClick">{{content1111}}</li>',
+        methods:{
+            handleClick:function () {
+//                alert("clicked")
+                this.$emit('delete',this.index)
+            }
+        }
+    })
+
+
+    new Vue({
+        el: "#root",
+        //指定局部组件
+//        components:{
+//          'todo-item':TodoItem
+//        },
+        data: {
+            inputValue: '',
+            list: []
+        },
+        methods: {
+            handleSubmit: function () {
+                this.list.push(this.inputValue)
+                this.inputValue = ''
+            },
+            handleDelete:function (index) {
+                this.list.splice(index,1)
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
