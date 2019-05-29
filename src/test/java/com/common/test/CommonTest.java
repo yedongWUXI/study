@@ -1,6 +1,9 @@
 package com.common.test;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import lombok.Data;
 import org.junit.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -8,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.processing.AbstractProcessor;
 import java.awt.image.DataBuffer;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigInteger;
 import java.util.*;
@@ -242,6 +246,51 @@ public class CommonTest {
     public void test12() {
         Byte a = 66;
         System.out.println(a == 66);
+    }
+
+    @Test
+    public void test13() throws IOException {
+        Map map = new HashMap();
+        List<Map> list = new ArrayList<>();
+        List<map> list3 = new ArrayList<>();
+        List<String> list1 = new ArrayList<>();
+        map.put("test", "22");
+        list.add(map);
+        map = new HashMap();
+        map.put("test2", "33");
+        list.add(map);
+        map = new HashMap();
+        map.put("test3", "44");
+        list.add(map);
+
+        list1.add("1");
+        list1.add("2");
+        list1.add("3");
+
+        map map1 = new map();
+        map1.setK("test");
+        map1.setV("22");
+        list3.add(map1);
+        map1 = new map();
+        map1.setK("test");
+        map1.setV("33");
+        list3.add(map1);
+        map1 = new map();
+        map1.setK("test");
+        map1.setV("44");
+        list3.add(map1);
+        System.out.println(JSON.toJSONString(list));
+        System.out.println(JSON.toJSONString(list1, SerializerFeature.DisableCircularReferenceDetect));
+        System.out.println(JSON.toJSONString(list3));
+        System.out.println(JacksonUtil.bean2Json(list3));
+
+
+    }
+
+    @Data
+    class map {
+        String k;
+        String v;
     }
 
 

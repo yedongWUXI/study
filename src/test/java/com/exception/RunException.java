@@ -1,7 +1,7 @@
 package com.exception;
 
 /**
- * @Description: %s代表Exception里后面信息的占位符
+ * @Description: String.format  %s代表Exception里后面信息的占位符
  * @Author: Administrator
  * @Date: 2019/3/13 22:25
  * @Modified by:

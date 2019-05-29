@@ -228,18 +228,23 @@ public class Stream {
     @Test
     public void test6() {
 
-        String time = "2018/06/10/19";//获取制定日期时间戳
-        Date date1 = null;
+        String time = "2018/09/21/19";//获取制定日期时间戳
+        String timeMarry = "2018/09/22/10";//获取制定日期时间戳
+        Date date = null;
         try {
-            date1 = new SimpleDateFormat("yyyy/MM/dd/hh").parse(time);
+            date = new SimpleDateFormat("yyyy/MM/dd/hh").parse(time);
+            long Timestamp = date.getTime();
+            date = new SimpleDateFormat("yyyy/MM/dd/hh").parse(timeMarry);
+//            long missTime = System.currentTimeMillis() - Timestamp;
+            long missTime = date.getTime() - Timestamp;
+            System.out.println("missTime:" + missTime / 1000 / 60 / 60 / 24 + "\t 天数");
+            System.out.println("missTime:" + missTime / 1000 / 60 / 60 + "\t 小时");
+            System.out.println("missTime:" + missTime / 1000 / 60 + "\t 分钟");
+            System.out.println("missTime:" + missTime / 1000 + "\t 秒");
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        long Timestamp = date1.getTime();
-        long missTime = System.currentTimeMillis() - Timestamp;
-        System.out.println("missTime:" + missTime / 1000 / 60 / 60 / 24 + "\t 天数");
-        System.out.println("missTime:" + missTime / 1000 / 60 / 60 + "\t 小时");
-        System.out.println("missTime:" + missTime / 1000 + "\t 秒");
     }
 
     @Test
