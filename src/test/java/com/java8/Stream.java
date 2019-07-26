@@ -1,5 +1,6 @@
 package com.java8;
 
+import com.design.demo.domain.Car1;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
@@ -298,6 +299,21 @@ public class Stream {
     public void test10() {
         System.out.println(System.currentTimeMillis());
         System.out.println(System.currentTimeMillis() - 5 * 60 * 1000);
+    }
+
+    @Test
+    public void test11() {
+        List<Car1> list = new ArrayList();
+        List<Long> collect = list.stream().map(Car1::getId).collect(Collectors.toList());
+
+
+//        .collect(Collectors.toMap(UserBo::getUserId, v -> v, (v1, v2) -> v1));
+//        第一个参数UserBo::getUserId 表示选择UserBo的getUserId作为map的key值；
+//        第二个参数v -> v表示选择将原来的对象作为map的value值；
+//        第三个参数(v1, v2) -> v1中，如果v1与v2的key值相同，选择v1作为那个key所对应的value值。
+        Map<Long, Car1> collect1 = list.stream().collect(Collectors.toMap(Car1::getId, v -> v, (v1, v2) -> v1));
+
+
     }
 
 }
