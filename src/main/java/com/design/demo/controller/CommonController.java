@@ -2,15 +2,16 @@ package com.design.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.design.demo.config.ValueDemo;
+import com.design.demo.config.bean.yedong;
 import com.design.demo.domain.Student;
 import com.design.demo.web.Test;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @author zhangyedong
@@ -23,13 +24,15 @@ public class CommonController {
     @Autowired
     Test test;
 
+    @Autowired
+    yedong yedong;
 
 
     @Autowired
     ValueDemo valueDemo;
 
     @RequestMapping(value = "one", method = RequestMethod.POST)
-    public String aopTest(){
+    public String aopTest() {
         Student student = new Student("zs");
         String studentStr = JSONObject.toJSON(student).toString();
         return studentStr;
@@ -37,9 +40,17 @@ public class CommonController {
     }
 
     @RequestMapping(value = "two", method = RequestMethod.GET)
-    public String valueTest(){
+    public String valueTest() {
         valueDemo.init("1");
+        System.out.println(yedong.getName());
         return valueDemo.getDriver();
+    }
+
+
+    @RequestMapping(value = "two_two", method = RequestMethod.GET)
+    public String valueTestToDel(String s) {
+        System.out.println(s);
+        return s;
     }
 
 
@@ -61,12 +72,33 @@ public class CommonController {
     }
 
 
+    @RequestMapping(value = "five", method = RequestMethod.GET)
+    @ApiOperation(value = "swaggerTest")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name="name", dataType = "string", value = "222")
+//    })
+    public String swaggerTest2(@RequestBody Map map) {
+        return "success";
+    }
 
 
+    /**
+     * @param id
+     * @return
+     * @PathVariable 见印象笔记HTTP@RequestParam和@PathVariable的区别
+     */
+    @PostMapping(value = "five/{id}")
+    @ApiOperation(value = "swaggerTest")
+    public String swaggerTest3(@PathVariable String id) {
+        return "success" + id;
+    }
 
 
-
-
+    @RequestMapping(value = "globalException", method = RequestMethod.GET)
+    @ApiOperation(value = "全局异常测试")
+    public String globalException() {
+        throw new NullPointerException();
+    }
 
 
 }
