@@ -9,6 +9,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -30,6 +33,11 @@ public class CommonController {
 
     @Autowired
     ValueDemo valueDemo;
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+
 
     @RequestMapping(value = "one", method = RequestMethod.POST)
     public String aopTest() {
@@ -100,5 +108,24 @@ public class CommonController {
         throw new NullPointerException();
     }
 
+
+    /**
+     * spring bean 重新注册
+     *
+     * @return
+     */
+    @RequestMapping(value = "springBeanRegister", method = RequestMethod.POST)
+    public String springBeanRegister() {
+        System.out.println(yedong.getName());
+
+        yedong yedong = new yedong();
+        yedong.setName("zs");
+        ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) applicationContext;
+        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext.getBeanFactory();
+        defaultListableBeanFactory.removeBeanDefinition("yedong");
+        defaultListableBeanFactory.registerSingleton("yedong", yedong);
+        System.out.println(yedong.getName());
+        return yedong.getName();
+    }
 
 }

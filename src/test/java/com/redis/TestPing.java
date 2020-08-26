@@ -21,18 +21,23 @@ public class TestPing {
 
     public static void main(String[] args) {
 
-        Jedis jedis = new Jedis("139.224.14.200", 6379);
+//        Jedis jedis = new Jedis("139.224.14.200", 6379);
+        Jedis jedis = new Jedis("127.0.0.1", 6379);
 
         jedis.set("test", "yedong");
         String test = jedis.get("test");
 
 //        jedis.setrange()
 
-
+        for (int i = 0; i < 1000; i++) {
+            jedis.set(String.valueOf(i), "yedong");
+        }
         System.out.println(jedis.ping());
+        String s = jedis.get("2");
         System.out.println(test);
+        System.out.println(s);
 
-
+        jedis.close();
     }
 
     @Test

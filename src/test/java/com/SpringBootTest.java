@@ -16,16 +16,14 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 public class SpringBootTest {
 
+    @Autowired
+    private JavaMailSender mailSender; //自动注入的Bean
+    @Value("${spring.mail.username}")
+    private String Sender; //读取配置文件中的参数
+
     public static void main(String[] args) {
         SpringApplication.run(SpringBootTest.class, args);
     }
-
-
-    @Autowired
-    private JavaMailSender mailSender; //自动注入的Bean
-
-    @Value("${spring.mail.username}")
-    private String Sender; //读取配置文件中的参数
 
     /**
      * 简单测试发送邮件
@@ -38,7 +36,7 @@ public class SpringBootTest {
         message.setFrom(Sender);
         message.setTo("1280125483@qq.com");
         message.setSubject("主题：简单邮件");
-        message.setText("国庆去哪玩呀");
+        message.setText("春节去哪玩呀");
         mailSender.send(message);
     }
 

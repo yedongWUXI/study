@@ -3,6 +3,7 @@ package com.common.test;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.design.demo.json.Student;
 import lombok.Data;
 import org.junit.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -24,11 +25,6 @@ import java.util.stream.Collectors;
  * @date 2018/2/26.
  */
 public class CommonTest {
-    @Transactional
-    public void test() {
-
-    }
-
     public static void main(String[] args) throws ClassNotFoundException {
         for (int i = 0, n = args.length; i < n; i++) {
             System.out.println("Arg " + i + ":" + args[i]);
@@ -42,6 +38,11 @@ public class CommonTest {
         };
 
         Class.forName("");
+    }
+
+    @Transactional
+    public void test() {
+
     }
 
     @Test
@@ -287,6 +288,13 @@ public class CommonTest {
 
     }
 
+
+    @Test
+    public void test14() {
+        Student student = new Student();
+        String name = student.getName();
+        System.out.println(name);
+    }
     @Data
     class map {
         String k;

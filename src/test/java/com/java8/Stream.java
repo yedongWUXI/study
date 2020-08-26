@@ -1,5 +1,6 @@
 package com.java8;
 
+import com.alibaba.fastjson.JSONArray;
 import com.design.demo.domain.Car1;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
@@ -304,6 +305,9 @@ public class Stream {
     @Test
     public void test11() {
         List<Car1> list = new ArrayList();
+        list.add(new Car1("", "BMW", 1, 1L));
+        list.add(new Car1("", "BC", 2, 1L));
+        list.add(new Car1("", "BYD", 3, 1L));
         List<Long> collect = list.stream().map(Car1::getId).collect(Collectors.toList());
 
 
@@ -311,8 +315,17 @@ public class Stream {
 //        第一个参数UserBo::getUserId 表示选择UserBo的getUserId作为map的key值；
 //        第二个参数v -> v表示选择将原来的对象作为map的value值；
 //        第三个参数(v1, v2) -> v1中，如果v1与v2的key值相同，选择v1作为那个key所对应的value值。
-        Map<Long, Car1> collect1 = list.stream().collect(Collectors.toMap(Car1::getId, v -> v, (v1, v2) -> v1));
+        Map<Long, Car1> collect1 = list.stream().collect(Collectors.toMap(Car1::getId, v -> v, (oldVal, newVal) -> newVal));
 
+
+        //peek入参是consumer consumer没有返回值 所以peek没有返回值 因此peek不能对stream进行‘改变内部结构’操作
+        List<Car1> peekList = list.stream().peek(v -> v.setYear(v.getYear() + 1)).peek(v -> v.setYear(v.getYear() + 1)).collect(Collectors.toList());
+
+        //map入参是function  function有返回值  所以第一个map返回的是stream操作后 返回的修改后的结构
+        List<Integer> mapList = list.stream().map(Car1::getYear).collect(Collectors.toList());
+
+        System.out.println(JSONArray.toJSONString(peekList));
+        System.out.println(JSONArray.toJSONString(mapList));
 
     }
 

@@ -54,6 +54,7 @@ public class StreamTest {
             v.setName("");
         }).collect(Collectors.toList());
 
+
         System.out.println(collect1);
 
 //        System.out.println(dishMap);
