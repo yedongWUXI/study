@@ -6,6 +6,8 @@ package com.design.demo.domain;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * @author yedong
  */
@@ -14,7 +16,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "nonNullArgsMethod", access = AccessLevel.PUBLIC)//生成有@NonNull参数的构造函数
-public class Car {
+public class Car implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @NonNull
     public String make;
@@ -30,7 +33,8 @@ public class Car {
         //staticName = "nonNullArgsMethod"
         Car car = Car.nonNullArgsMethod("", "");
         //@Builder
-        Car build = Car.builder().build();
+        Car build = Car.builder().id(1L).make("CN").model("BM").build();
+
     }
 
 }
