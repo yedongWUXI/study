@@ -1,0 +1,49 @@
+<!--
+
+触发当前实例上的事件。附加参数都会传给监听器回调。
+
+参数：
+
+{string} eventName
+[...args]
+
+
+示例：
+
+只配合一个事件名使用 $emit
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue入门</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+<div id="emit-example-simple">
+    <welcome-button v-on:welcome="sayHi"></welcome-button>
+</div>
+
+<script>
+
+
+    Vue.component('welcome-button', {
+        template: `<button v-on:click="$emit('welcome')">
+                    Click me to be welcomed
+                   </button>
+                  `
+    })
+    new Vue({
+        el: '#emit-example-simple',
+        methods: {
+            sayHi: function () {
+                alert('Hi!')
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

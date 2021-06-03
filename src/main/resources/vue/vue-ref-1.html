@@ -1,0 +1,43 @@
+<!--
+
+使用ref  获取本页面的dom元素
+(打开console查看)
+
+
+ref
+预期：string
+
+ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。
+如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；
+如果用在子组件上，引用就指向组件实例
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue入门</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div ref="testDom">11111</div>
+    <!--获取本页面的dom元素-->
+    <button @click="getTest">获取test节点</button>
+</div>
+
+<script>
+    new Vue({
+        el: "#app",
+        methods: {
+            getTest: function () {
+                console.log(this.$refs.testDom)
+
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

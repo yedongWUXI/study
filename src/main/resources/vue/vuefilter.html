@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue入门</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <span>{{money | toMoney }}</span>
+</div>
+<script>
+    //filter
+    Vue.filter('toMoney', value = > {
+        // 这个 过滤器是为了检验过滤器获取的value是它管道符前面的值
+        //是它管道符前面的值还是原始值？
+        console.log(value); //打印出1,000,000 ，证明是管道符前面的值
+    return value;
+    //    return value.toLocaleString();
+    })
+    ;
+
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            a: 10,
+            money: 1000000
+        },
+        filters: {  //局部过滤器
+
+        }
+    });
+</script>
+</body>
+</html>

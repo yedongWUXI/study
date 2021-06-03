@@ -1,0 +1,62 @@
+<!--
+
+触发当前实例上的事件。附加参数都会传给监听器回调。
+
+参数：
+
+{string} eventName
+[...args]
+
+
+示例：
+
+配合额外的参数使用 $emit
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue入门</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+<div id="emit-example-argument">
+    <magic-eight-ball v-on:give-advice="showAdvice"></magic-eight-ball>
+</div>
+<script>
+
+
+    Vue.component('magic-eight-ball', {
+        data: function () {
+            return {
+                possibleAdvice: ['Yes', 'No', 'Maybe']
+            }
+        },
+        methods: {
+            giveAdvice: function () {
+                var randomAdviceIndex = Math.floor(Math.random() * this.possibleAdvice.length)
+                this.$emit('give-advice', this.possibleAdvice[randomAdviceIndex])
+            }
+        },
+        template: `
+                    <button v-on:click="giveAdvice">
+                      Click me for advice
+                    </button>
+                  `
+    })
+
+
+    new Vue({
+        el: '#emit-example-argument',
+        methods: {
+            showAdvice: function (advice) {
+                alert(advice)
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
